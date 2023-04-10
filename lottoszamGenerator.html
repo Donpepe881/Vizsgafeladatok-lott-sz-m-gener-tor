@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottószám generátor</title>
+</head>
+<style>
+    #felulet {
+        background-color: lightblue;
+        font-style: italic;
+        border: 2px solid green;
+        box-shadow: 2px 2px 20px black;
+        height: 80px;
+        width: 400px;
+        text-align: center;
+        font-size: 20px;
+        position: relative;
+        left: 150px;
+        top: 10px;
+    }
+
+    #statisztika {
+        background-color: antiquewhite;
+        font-style: normal;
+        border: 3px solid firebrick;
+        box-shadow: 2px 2px 25px teal;
+        height: 100px;
+        width: 300px;
+        left: 190px;
+        position: relative;
+        text-align: center;
+        margin: 10px;
+
+    }
+</style>
+
+<body>
+    <button id="lottoGenerator">Lottó számok generálása</button>
+    <div id="felulet">5-s lottó eredményei: </div> <br>
+    <div id="statisztika">Statisztika:</div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        function UniverzalisLottoSzamGenerator(meret, maxErtek) {
+            if (meret < maxErtek) {
+                let lottoSzamok = [];
+                while (lottoSzamok.length < meret) {
+                    let
+                        generaltSzam = Math.round(Math.random() * (maxErtek - 1)) + 1;
+                    let szerepelE = false;
+                    for (let j = 0; j < lottoSzamok.length; j++) {
+                        if (generaltSzam == lottoSzamok[j]) { szerepelE = true; }
+                    }
+                    if (szerepelE == false) {
+                        lottoSzamok.push(generaltSzam);
+                    }
+                } return lottoSzamok;
+            } else {
+                return "Nem megfelelő paraméterezés..." //return false helyett
+            }
+        }
+
+        $(document).ready(function () {
+
+            $("#lottoGenerator").click(function () {
+                let eredmeny = UniverzalisLottoSzamGenerator(5, 90);
+                $("#felulet").text("Univerzális Ötös lottó eredményei: (" + eredmeny + ")")
+
+
+
+
+                let gyakorisag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                let elofordulas = [];
+                elofordulas.push(eredmeny);
+                for (let i = 0; i < elofordulas.length; i++) {
+                    gyakorisag[elofordulas[i]]++;
+                }
+                $("#statisztika").text("Előfordulás: " + gyakorisag);
+            });
+
+        });
+    /*
+                                                                                            for (let i = 0; i < dobasok.length; i++) {
+                                                                                                dobasmennyiseg[0] += dobasok[i];
+                                                                                                dobasmennyiseg[dobasok[i]]++;
+                                                                                                
+                                                                                                let dobasok = [];
+                                                                                        
+                                                                                                function KockaMegjelenites() {
+                                                                                                    let kockaSzam = KockaDobas();
+                                                                                                    dobasok.push(kockaSzam);
+                                                                                                    */
+
+    </script>
+
+</body>
+
+</html>
